@@ -1,0 +1,11 @@
+﻿Jira: http://jira.runsystem.info:8080/secure/Dashboard.jspa
+Id: thanhhm
+Pass: Minhthanhhua95@gmail.com
+
+Git: http://devops.runsystem.info/
+Id thanhhm
+Pass: Minhthanhhua95@gmail.com
+
+Mail:
+thanhhm@runsystem.net
+Uthunghua95
