@@ -1,0 +1,28 @@
+﻿Chỉnh lock wait time out cho mysqld cũ:
+show variables like 'innodb_lock_wait_timeout' 
+/etc/init.d/mysqld restart
+/etc/my.cnf
+
+Hiển thị câu query đang chạy
+SHOW PROCESSLIST;
+
+// ẩn url trong mail
+http://devops.runsystem.info/hcm_branch/yoru.me/commit/248500ed0cabc39be8da376e6eed8d1c11c425ae
+
+Xử lý không cho nhập number
+onkeypress = 'isNumberKey(event)'
+function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+
+
+
+
+
+
+
+
+
