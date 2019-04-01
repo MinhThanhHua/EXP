@@ -1,0 +1,66 @@
+﻿+ Khó khăn: [Router] Khi đặt tên cho url thì có 2 trường hợp là có truyền param và không truyền param
+Hướng xử lý: Đặt 2 router
+VD: $routes->connect('/post/:id', ['controller' => 'Review', 'action' => 'post'], ['id' => '\d+', 'pass' => ['id']]);
+    $routes->connect('/post', ['controller' => 'Review', 'action' => 'post']);
+
++ Khó khăn: [Model] Chuyển query từ dạng object sang dạng mảng
+Hướng xử lý: sử dụng thêm thuộc tính enableHydration(false) 
+VD: $query = $this->find()
+            ->enableHydration(false);
+
++ Khó khăn: [Kỹ thuật] Decode sang dạng array thay vì object
+Hướng xử lý: thêm true sau khi dùng json_decode
+VD: json_decode($data['graphDataJson'], true);
+
++ Khó khăn [Kỹ thuật] Láy data từ js sang php
+Hướng xử lý: Chỉ có thế lấy data từ php sang js, do đó tìm hướng xử lý phù hợp
+
++ Khó khăn: [Router] Lấy full ulr (bao gồm domain)
+Hướng xử lý: Dùng thư viện Router, đặt biến true, ngược lại mặc định là false (ko lấy domain)
+VD: return Router::url([
+            	'controller' => $controller,
+            	'action' => $action,
+            	$id
+        	], true); 
+
++ Khó khăn: [Kỹ thuật] Nằm ngoài controller (Component) thì không gọi được request hay model 
+Hướng xử lý:
+    //Tạo biến chung    
+    protected $controller;
+    protected $validate;
+
+    public function initialize(array $config)
+    {
+        parent::initialize($config);
+        
+	//Thêm biến controller trước khi gọi.
+        $this->controller = $this->getController();
+        $this->controller->loadModel('CampaignCode');
+        $this->controller->loadModel('Review');
+        $this->controller->loadModel('Shop');
+        $this->controller->loadModel('InviteCode');
+	
+        $this->CampaignCode = $this->controller->CampaignCode;
+        $this->Review = $this->controller->Review;
+        $this->Shop = $this->controller->Shop;
+        $this->InviteCode = $this->controller->InviteCode;
+
+        $this->validate = new Validate();
+    }
+
++ Khó khăn: [Kỹ thuật] IOS zoom khi click vào fomr input, hoặc button
+Với button: Thêm css cho button
+Vd:
+button {
+	touch-action: manipulation;
+}
+Với form input: Thêm thẻ meta
+Vd:
+$('meta[name=viewport]').attr('content', 'width=device-width, initial-scale=1.0, shrink-to-fit=no, user-scalable=no');
+
++ Khó khăn: [Table] Truy vấn sai khi join bảng
+Mô tả: Khi join bảng có dùng count thì nhớ dùng DISTINCT để tránh data sẽ x2, x3,.. data lên do ảnh hưởng từ bảng khác
+VD
+Join 3 bảng A, B, C:
+Với bảng A có 2 row, bảng B có 9 row
+Khi join count không dùng DISTINCT thì đếm thành 18 dòng => đếm sai.
