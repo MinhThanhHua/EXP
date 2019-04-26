@@ -18,6 +18,9 @@ function isNumberKey(evt) {
         return true;
     }
 
+Khi muốn replace toàn bộ các ký tự thì ko cần dùng for mà dùng g
+vd:myStr.replace(/,/g, '-'); => đổi tất cả dấu , thành dấu -
+
 
 
 
