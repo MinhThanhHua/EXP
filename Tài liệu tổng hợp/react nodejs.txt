@@ -1,0 +1,24 @@
+﻿npm install e
+xpress-react-router-views 
+react react-dom 
+react-router // dùng để xử dụng Link, router trong react
+history 
+express --save
+
+
+// Handlebars
+npm install express-handlebars
+
+app.engine('.hbs', exphbs({
+    extname: '.hbs',
+    defaultLayout: 'main',
+    partialsDir: path.join(__dirname, 'views/partials'),
+    layoutsDir: path.join(__dirname, 'views/layouts')
+  }));
+app.set('view engine', '.hbs');
+app.set('views',path.join(__dirname,'views'))
+
+npm install moment // pacakage time
+npm install handlebars-form-helpers // helper cho view template
+https://github.com/badsyntax/handlebars-form-helpers
+ npm install express-validator@5.3.1 // validate cho form
