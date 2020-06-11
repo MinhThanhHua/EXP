@@ -1,0 +1,94 @@
+Lưu ý: không login quyền root khi cài đặt nhé, mắc công sau này phải change role 
+https://www.fosstechnix.com/install-sonarqube-on-centos/
+[Cài đặt java]
+Instal java: sudo yum install java-11-openjdk-devel
+Check java -version
+
+================================== Cài đặt sonar ================================================
+Download: wget https://binaries.sonarsource.com/CommercialDistribution/sonarqube-developer/sonarqube-developer-8.2.0.32929.zip
+Install unzip (nếu chưa cài): sudo yum -y install unzip
+Unzip file vừa tại: sudo unzip sonarqube-developer-8.2.0.32929.zip -d /opt
+Change name file vừa unzip: sudo mv /opt/sonarqube-6.4 /opt/sonarqube
+Install nano: yum install nano (cần thì cài, không thì cứ dùng vi thôi :D)
+
+
+============== Mysql - Dưới bản 7.8] ======================================
+Create table sonar: CREATE DATABASE sonar;
+Vào config sonar (database sẽ dùng, account db, ...): vi /opt/sonarqube/conf/sonar.properties
+Add line nếu dùng mysql, xài cái khác thì uncomment: sonar.jdbc.url=jdbc:mysql://localhost:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance
+
+============== Postgresql ======================================
+Vì Mysql hết hỗ trợ nên sang postgresql: sudo rpm -Uvh https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm
+Install: sudo yum -y install postgresql96-server postgresql96-contrib
+initialize the database: sudo /usr/pgsql-9.6/bin/postgresql96-setup initdb
+enable MD5-based authentication:  vi /var/lib/pgsql/9.6/data/pg_hba.conf 
+https://gyazo.com/5f76df99de17e89d72efbc8b5e586e7f
+Start PostgreSQL server and enable it to start automatically at boot time by running: 
+ 	sudo systemctl start postgresql-9.6
+	sudo systemctl enable postgresql-9.6
+Change password default: sudo passwd postgres
+Switch to the postgres user: su - postgres
+Create a new user by typing: createuser sonar (*)
+Switch to the PostgreSQL shell: psql
+Set a password for the newly created user for SonarQube database: ALTER USER sonar WITH ENCRYPTED password 'StrongPassword'; (**)
+Create a new database: CREATE DATABASE sonar OWNER sonar;
+Exit from the psql shell: \q
+Lưu ý: khi chọn sai version java thì (sau khi tải 1 version mới): sudo update-alternatives --config java => chọn lại version đã cài đặt
+Vào config sonar (database sẽ dùng, account db, ...) thêm, uncomment 3 dòng sau: vi /opt/sonarqube/conf/sonar.properties
+sonar.jdbc.username=name_user (*)
+sonar.jdbc.password=pass_user (**)
+sonar.jdbc.url=jdbc:postgresql://localhost/sonar
+
+============== Cấu hình service run sonar ======================================
+Add file: vi /etc/systemd/system/sonar.service
+Khi file này có thay đổi thì run lệnh sau để restart system: systemctl daemon-reload
+Thêm nội dung này vào file sonar.service:
+
+[Unit]
+Description=SonarQube service
+After=syslog.target network.target
+
+[Service]
+Type=forking
+
+ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
+ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
+LimitNOFILE=65536
+LimitNPROC=8192
+
+User=vagrant (Note: đổi tên user trùng với cái đã config trong sonar.sh nhé)
+Group=vagrant
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+
+========================== Stop, không copy cả đoạn này vào nhé :D =====
+Run:
+Start sonar: sudo systemctl start sonar
+Enable sonar: sudo systemctl enable sonar
+Nếu thành công thì chạy lên browser: domain:9000, ở vagrant thì là http://192.168.33.10:9000/about
+
+
+
+======================== Set quyền chạy sonar =====================================
+Set run quyền vagrant (ko cho run root): bin/linux/sonar.sh
+vi sonar.sh => change RUN_AS_USER=vagrant
+đổi quyền root sang user: sudo chown -R $USER:$USER folder_path
+thắc mắc $USER là gì thì cứ: echo $USER ra nhé :D
+
+======================== Path trong sonar =====================================
+/opt => khi unzip thì toàn bộ folder của sonar sẽ nằm ở đây
+/opt/sonarqnbe/bin => config run file
+/opt/sonarqnbe/logs => file log
+
+
+https://superuser.com/questions/1465270/sonarqube-starting-failed
+
+
+
+
+
+
+
