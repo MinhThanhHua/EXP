@@ -1,0 +1,2 @@
+1 triệu request => cache redis 2 tầng, server nginx load balancer, sử dụng haproxy chia tải,
+sql thì sử dụng Master - Slave(1 sv đọc 1 sv ghi).
