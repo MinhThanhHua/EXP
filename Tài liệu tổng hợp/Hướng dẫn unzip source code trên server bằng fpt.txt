@@ -1,4 +1,0 @@
-b1) Ném 1 file bất kỳ dưới dạng zip lên server 
-b2) đưa file php unzipper.php lên server
-b3) truy cập trang dẫn tới file php trên, chọn file cần unzip trong selectbox rồi
-click button unzip => success
