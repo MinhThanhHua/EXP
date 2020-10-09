@@ -1,0 +1,49 @@
+winpty docker run -it --privileged new_image /usr/sbin/init
+docker images
+docker build -t new_image .
+docker version
+docker info
+docker run [local image] [command to run into container]
+
+-it thì nó sẽ chạy vào trong container luộn
+winpty docker run -it centos
+docker run centos
+
+khi đang ở trong container có thể click Ctrl + P rồi Ctrl + Q để thoát ra (contianer vẫn chạy)
+khi muốn vào lại thì: docker attach <container_id>
+muốn dừng container: docker kill <container_id>
+========= Thêm gì đó vào image==========
+Muốn cài đặt thêm 1 cái gì đó vài image:
+Tải 1 images centos về
+Chạy và install các thứ cần thiết
+Mở 1 cmd lên, gõ docker ps => lấy id của images đó
+Sau đó chạy lệnh sau: docker commit <container_id> tên_images_mới
+=> 1 images mới sẽ được tạo ra.
+========= Deploy demo =================
+https://www.tecmint.com/install-docker-and-learn-containers-in-centos-rhel-7-6/
+(Centos 7 - Nginx - Mysql - PhpMyAdmin)
+1. Cần 1 server ubuntu/centos
+Search : docker search centos:7
+Pull : docker pull centos:7
+Run: docker run -it centos:7
+yum => centos
+apt-get => ubuntu
+2. Cần môi trường apache/nginx
+yum install epel-release
+yum install nginx
+=> Sau khi save 1 image mới thì check xem đã install ok chưa (ra path của nginx):
+winpty docker run centos-nginx whereis nginx
+Sau đó vào /etc/nginx/nginx.conf để enable server lên
+
+Share file index giữa máy ảo và máy thật
+path root nginx: /usr/share/nginx/html/
+
+winpty docker run -it -v d:/Docker/test -p 81:80 centos-nginx bin/sh
+với -v d:/Docker/test .... bin/sh => connect ổ đĩa ảo với thật
+Mẫu: docker run -d -p 80:80 -v <sites-enabled-dir>:/etc/nginx/conf.d  -v <log-dir>:/var/log/nginx nginx
+Mẫu: docker run -it --rm -d -p 8080:80 --name web nginx
+
+
+
+
+https://www.tecmint.com/install-apache-web-server-in-a-docker-container/
