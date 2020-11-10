@@ -1,0 +1,97 @@
+cuộc vui co đơn
+
+07/2018 ~ 08/2018		Kinezo		Sử dụng CakePHP3, code trang quản lý admin		
+08/2018 ~ 09/2018		UNICORN		Sử dụng PHP, code chức năng theo yêu cầu KH		
+09/2018 ~  12/2018		Bike Share		Sử dụng CakePHP3, code các chức năng của hệ thống.		
+12/2018 ~ 03/2019		BizPalette		Sử dụng Zend 1, code chức năng theo yêu cầu KH		
+02/2019 ~ 06/2019		Yorume		Sử dụng CakePHP3, code các chức năng của hệ thống.		
+07/2019 ~ 10/2019		Nove Drama Game 		Sử dụng Laravel 5.8, code API, Unit Test  + trang quản lý admin		
+10/2019 ~ 11/2019		UNICORN		Sử dụng PHP, code chức năng theo yêu cầu KH		
+11/2019 ~ 11/2019		NAS		"Sử dụng các dịch vụ của bên thứ 3 như:
++ Amazon (S3, Lambda, IOT, APIGateway, RDS Mysql)
++ Google (Maps, capcha,Push noti for group MS teams), 
++ Line (login, push notification).
+Sử dụng framword Express (trên nền tảng Nodejs - Javascrip) connect với các services của amazon."		
+12/2019 - 03/2020		E-Ticket		Sử dụng CakePHP3, code trang quản lý admin
+04/2020 - 11/2020		NHK For School		
+
+===============================================================================================================================
+Bike Share
++ Mô tả
+	Đây là dự án cho phép người dùng thuê hoặc cho thuê xe đạp. 
+	Tại đây, người dùng có thể đăng ký thông tin xe, tài khoảng cá nhân, vị trí xe.
+	Người dùng khác có thể xem thông tin xe được đăng ký, vị trí chính xác hoặc phạm vi xe (khi login thì xe được chính xác vị trí)
+	Hệ thống có 1 vài chức năng thông dụng sau: Nhận phản hồi người dùng thông qua mail, hỗ trợ đa ngôn ngữ, translate bằng google dịch,
+	chat trực tuyến, thanh toàn trực tuyến, sử dụng coupon, thuê/cho thuê xe...
+Language: HTML5/ CSS3, Javascript, CakePHP3
+Team: BE 4, QC 3
+Position: Back-end developer
++ Detail job:
+	+ Deploy source with Vagrant
+	+ Code function get list message chat online, chat online
+	+ Code function create/confirm/edit/delete coupon, bike, inquiry
+	+ Improve function search bike on map, set/get map location, map marker,...
+	+ Write checklist and test project 
+	+ Use Git to manage the source.
+===============================================================================================================================
+Học:
++ Tìm hiểu migrations, view template CakePHP3, config connect database
++ Sử dụng service google map trong đó xử lý get lat/lng, định vị trí marker, get phạm vi từ tâm bản đồ, get vị trí thep gps, địa chỉ theo marker, v..v..
++ Sử dụng ajax realtime cho chức năng chat online
+
+
+===============================================================================================================================
+Yorume
++ Mô tả:
+	Đây là dự án cho phép người dùng xem hình ảnh, review, thống kê về các cô gái ở các hộp đêm.
+	Người dùng có thể đăng tải thông tin của bản thân mình, từ đó user khác có thể nhìn thấy và liên lạc.
+Language: HTML5/ CSS3, Javascript, CakePHP3
+Team: BE 2, FE 2, QC 2
+Position: Back-end developer
++ Code chức năng login, logout with normal and line, check captcha (Basic, Line)
++ Code chức năng send mail
++ Code chức năng hiển thị thống kê, vẽ biểu đồ chartJS, viết blog, myPage, like/unlike, follow/unfollow, send mail, inquiry
++ Tạo test case, checklist và test project
++ Use Git to manage the source.
+===============================================================================================================================
+Học:
++ Sử dụng MS Captcha
++ Thư viện chartJS
++ Login with Line
+
+===============================================================================================================================
+Nove Drama Game
++ Mô tả:
+	Hệ thống cho phép người dùng có thể tự tạo game về truyện cổ tích với hình ảnh, nhạc sống động.
+	Sau khi thiết kế, người dùng có thể tải game để trải nghiệm game cho chính mình thiết kế 
+Language: HTML5/ CSS3, Javascript, Laravel 5.8
+Team: BE 3, FE 4, QC 1
+Position: Back-end developer
++ Code chức năng thống kế page admin, quản lý hình ảnh, video 
++ Code Unit Test
++ Code page admin controll user/scene, KPI, quản lý thông tin image/banner/video trên S3 aws, resize img, v..v..
++ Code api cho ionic 
+===============================================================================================================================
+Học:
++ Sử dụng laravel 5.8
++ Sử dụng S3 aws
+
+===============================================================================================================================
+NHK For School	
++ Mô tả: 
+	Dự án tạo CMS quản lý chương trình phát sóng của trang https://www.nhk.or.jp/school/​
+	Giúp user có thể tạo/quản lý các file html,css,js, image...
+	User có thể xem preview page html được tạo/upload, kéo thả các khối html, xuất bộ html, release file lên server, ...
+Language: HTML5/ CSS3, Javascript, Laravel 5.8
+Team: BE 5, FE 4
+Position: Back-end developer	
++ Push noti for group MS teams
++ Code RESTful API​ for VueJs,  login/logout/phân quyền/zip/unzip,...
++ Export/Import Excel
++ Deploy source with Docker, cấu trúc source laravel
++ Tạo file htaccess, điều hướng url/review file/chặn open trực tiếp khi f12/ chặn truy cập folder/file
++ Export file html, css, js, image, ...
++ Code function get/upload file with ftp
++ Code function compare file/folder, takeSnapshotPDF
++ Code chức năng chạy ngầm, check process running, stop/kill process
+===============================================================================================================================
